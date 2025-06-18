@@ -55,5 +55,5 @@ The database consists of four main tables:
 # Database Schema for Checkpoint System
 
 ## Overview
-![Database Schema Diagram]()
+![Database Schema Diagram](Diagram_checkpoint01.png)
 This database schema provides a foundation for tracking organizational structure, employee assignments, and project management.
