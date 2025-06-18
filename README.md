@@ -52,4 +52,8 @@ The database consists of four main tables:
 - Create indexes for performance optimization
 - Add stored procedures for common operations
 
+# Database Schema for Checkpoint System
+
+## Overview
+![Database Schema Diagram]()
 This database schema provides a foundation for tracking organizational structure, employee assignments, and project management.
