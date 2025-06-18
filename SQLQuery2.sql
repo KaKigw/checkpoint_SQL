@@ -11,6 +11,7 @@ Label VARCHAR(255),
 Manager_Name VARCHAR(255)
 );
 
+-- creating Employee table
 CREATE TABLE  Employee(
 Num_E INT PRIMARY KEY,
 Name VARCHAR(255),
@@ -20,6 +21,7 @@ Department_Num_S INT,
 FOREIGN KEY (Department_Num_S) REFERENCES Department(Num_S)
 );
 
+-- creating Project table
 CREATE TABLE  Project(
 Num_P INT PRIMARY KEY,
 Title VARCHAR(255),
@@ -29,6 +31,7 @@ Department_Num_S INT,
 FOREIGN KEY (Department_Num_S) REFERENCES Department(Num_S)
 );
 
+-- creating Employee_Project table
 CREATE TABLE Employee_Project(
 Employee_Num_E INT,
 FOREIGN KEY (Employee_Num_E) REFERENCES Employee(Num_E), 
