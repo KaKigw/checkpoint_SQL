@@ -87,3 +87,28 @@ WHERE Employee_Num_E = 101;
 
 DELETE FROM Employee
 WHERE Num_E = 101;
+
+SELECT * FROM Employee_Project;
+
+-- 1. First, set the database to single-user mode to disconnect all other sessions
+USE master;
+GO
+
+ALTER DATABASE Checkpoint_02 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
+-- 2. Now rename the database (modern syntax recommended)
+ALTER DATABASE Checkpoint_02 MODIFY NAME = Checkpoint_DML;
+GO
+
+-- 3. Set the database back to multi-user mode
+ALTER DATABASE Checkpoint_DML SET MULTI_USER;
+GO
+
+-- 4. Verify the rename was successful
+SELECT name FROM sys.databases WHERE name = 'Checkpoint_DML';
+GO
+
+USE Checkpoint_DML
+GO
+
