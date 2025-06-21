@@ -1,9 +1,8 @@
-CREATE DATABASE Checkpoint_02; --Create a database
-
+CREATE DATABASE Checkpoint_DQL;
 GO
  
- USE Checkpoint_02; -- selecting db
-
+USE Checkpoint_DQL;
+GO
 -- creating Department table
 CREATE TABLE Department (
 Num_S INT PRIMARY KEY,
@@ -82,32 +81,24 @@ WHERE Employee_Num_E = 101;
 
 --Deletion of Num_E=101
 DELETE FROM Employee_Project
-WHERE Employee_Num_E = 101; 
+WHERE Employee_Num_E = 103; 
 
 DELETE FROM Employee
-WHERE Num_E = 101;
+WHERE Num_E = 103;
 
 SELECT * FROM Employee_Project;
-
--- 1. First, set the database to single-user mode to disconnect all other sessions
-USE master;
+GO
+SELECT * FROM Employee;
 GO
 
-ALTER DATABASE Checkpoint_02 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+--Write a query to retrieve the names of employees who are assigned to more than one project, including the total number of projects for each employee.
+SELECT e.Name, COUNT(ep.Project_Num_P) AS Total_Project
+FROM Employee_Project AS ep
+JOIN Employee AS e
+ON ep.Employee_Num_E = e.Num_E
+GROUP BY e.Name
+HAVING COUNT(ep.Project_Num_P)>1;
 GO
 
--- 2. Now rename the database (modern syntax recommended)
-ALTER DATABASE Checkpoint_02 MODIFY NAME = Checkpoint_DML;
-GO
-
--- 3. Set the database back to multi-user mode
-ALTER DATABASE Checkpoint_DML SET MULTI_USER;
-GO
-
--- 4. Verify the rename was successful
-SELECT name FROM sys.databases WHERE name = 'Checkpoint_DML';
-GO
-
-USE Checkpoint_DML
-GO
-
+--Write a query to retrieve the list of projects managed by each department, including the department label and manager’s name.

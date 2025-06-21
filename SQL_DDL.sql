@@ -40,4 +40,26 @@ FOREIGN KEY (Project_Num_P) REFERENCES Project(Num_P),
 Role VARCHAR(255)
 );
 
+-- 1. First, set the database to single-user mode to disconnect all other sessions
+USE master;
+GO
+
+ALTER DATABASE Checkpoint_db SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
+-- 2. Now rename the database (modern syntax recommended)
+ALTER DATABASE Checkpoint_db MODIFY NAME = Checkpoint_DDL;
+GO
+
+-- 3. Set the database back to multi-user mode
+ALTER DATABASE Checkpoint_DDL SET MULTI_USER;
+GO
+
+-- 4. Verify the rename was successful
+SELECT name FROM sys.databases WHERE name = 'Checkpoint_DDL';
+GO
+
+USE Checkpoint_DDL;
+GO
+
 
