@@ -102,3 +102,33 @@ HAVING COUNT(ep.Project_Num_P)>1;
 GO
 
 --Write a query to retrieve the list of projects managed by each department, including the department label and manager’s name.
+SELECT * FROM Department;
+GO
+SELECT * FROM Project;
+GO
+
+
+SELECT 
+    p.Title,
+    d.Label,
+    d.Manager_Name
+FROM Department AS d
+JOIN Project AS p
+  ON d.Num_S = p.Department_Num_S;
+
+
+  --Write a query to retrieve the names of employees working on the project "Website Redesign," including their roles in the project.
+
+SELECT * FROM Employee;
+GO
+SELECT * FROM Project;
+GO
+
+SELECT Name, Role
+FROM Employee AS E
+JOIN Employee_Project AS EP ON E.Num_E = EP.Employee_Num_E
+JOIN Project AS P ON EP.Project_Num_P = P.Num_P
+WHERE P.Title ='Website Redesign'
+GO
+
+--Write a query to retrieve the department with the highest number of employees, including the department label, manager name, and the total number of employees.
