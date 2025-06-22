@@ -1,59 +1,106 @@
-# Database Schema for Checkpoint System
+```markdown
+# 📘 Checkpoint_SQL
 
-## Overview
+A collection of T-SQL scripts and diagrams that model a simple company database—tracking departments, employees, projects, and who works on what.
 
-This repository contains SQL scripts to create a relational database for a checkpoint management system. The database tracks departments, employees, projects, and the relationships between them.
+> **Note:** The `SQL_DQL.sql` script is still in progress and not covered here.
 
-## Database Structure
+---
 
-The database consists of four main tables:
+## 📁 Repository Structure
 
-### 1. Department Table
-- `Num_S`: Primary key (department ID)
-- `Label`: Department name
-- `Manager_Name`: Name of the department manager
+```text
+.
+├── .gitattributes
+├── .gitignore
+├── SQL_DDL.sql            ← CREATE TABLE scripts (DDL)
+├── SQL_DML.sql            ← INSERT sample data (DML)
+├── SQL_Online_Shop.sql    ← Alternate “online shop” schema
+└── images/
+    └── online_shop_schema.png  ← ER diagram for the shop schema
+```
 
-### 2. Employee Table
-- `Num_E`: Primary key (employee ID)
-- `Name`: Employee name
-- `Position`: Job position
-- `Salary`: Salary amount
-- `Department_Num_S`: Foreign key referencing the Department table
+---
 
-### 3. Project Table
-- `Num_P`: Primary key (project ID)
-- `Title`: Project name
-- `Start_Date`: Project start date
-- `End_Date`: Project end date
-- `Department_Num_S`: Foreign key referencing the Department table
+## 🔍 Schema Overview
 
-### 4. Employee_Project Table (Junction Table)
-- `Employee_Num_E`: Foreign key referencing the Employee table
-- `Project_Num_P`: Foreign key referencing the Project table
-- `Role`: Employee's role in the project
+### Department  
+- **Num_S** (PK): Department ID  
+- **Label**: Department name  
+- **Manager_Name**: Name of the department manager  
 
-## Relationships
-- Each Department can have multiple Employees (one-to-many)
-- Each Department can have multiple Projects (one-to-many)
-- Employees can work on multiple Projects, and Projects can have multiple Employees (many-to-many, handled by the Employee_Project junction table)
+### Employee  
+- **Num_E** (PK): Employee ID  
+- **Name**: Full name  
+- **Position**: Job title  
+- **Salary**: Monthly salary  
+- **Department_Num_S** (FK → Department.Num_S)  
 
-## Usage
+### Project  
+- **Num_P** (PK): Project ID  
+- **Title**: Project name  
+- **Start_Date, End_Date**: Timeline  
+- **Department_Num_S** (FK → Department.Num_S)  
 
-1. Run the SQL script to create the database and tables
-2. You can then populate the tables with your data
-3. The schema supports queries like:
-   - Finding all employees in a department
-   - Finding all projects for a department
-   - Finding all employees working on a project
-   - Calculating department payroll totals
+### Employee_Project (junction)  
+- **Employee_Num_E** (FK → Employee.Num_E)  
+- **Project_Num_P** (FK → Project.Num_P)  
+- **Role**: What each employee does on the project  
 
-## Future Enhancements
-- Add constraints for data validation
-- Create indexes for performance optimization
-- Add stored procedures for common operations
+---
 
-# Database Schema for Checkpoint System
+## 🖼️ Entity-Relationship Diagram
 
-## Overview
-![Database Schema Diagram](/images/Diagram_checkpoint01.png)
-This database schema provides a foundation for tracking organizational structure, employee assignments, and project management.
+![Online Shop Schema](images/online_shop_schema.png)
+
+*This is the ER diagram for the alternate “Online Shop” schema (see `SQL_Online_Shop.sql`).*
+
+---
+
+## 🚀 Getting Started
+
+1. **Create a new database**  
+   ```sql
+   CREATE DATABASE Checkpoint_SQL;
+   GO
+   ```
+
+2. **Run the DDL script**  
+   ```sql
+   :r SQL_DDL.sql
+   ```
+   - Defines tables and foreign-key relationships.
+
+3. **Load sample data**  
+   ```sql
+   :r SQL_DML.sql
+   ```
+   - Populates `Department`, `Employee`, `Project`, and `Employee_Project`.
+
+4. **Explore & experiment**  
+   - Write `SELECT`, `JOIN`, `GROUP BY`, `HAVING` queries against the tables.  
+   - Practice `INSERT`, `UPDATE`, and `DELETE` operations in your sandbox.
+
+---
+
+## 💡 Next Steps
+
+- Add **CHECK** constraints and indexes for data integrity and performance.  
+- Create **views** or **stored procedures** for common reports.  
+- Flesh out the **SQL_DQL.sql** with query-based exercises (coming soon!).  
+- Integrate a CI/CD pipeline or schema validation tests.
+
+---
+
+## 🤝 Contributing
+
+Feel free to open an issue or submit a pull request when you:
+
+- Finish or refine the `SQL_DQL.sql` exercises  
+- Spot typos or suggest richer sample data  
+- Propose advanced queries, constraints, or optimization tips  
+
+---
+
+*Happy coding & querying!*  
+```
