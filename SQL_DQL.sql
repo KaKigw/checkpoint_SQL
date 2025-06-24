@@ -115,7 +115,7 @@ SELECT
 FROM Department AS d
 JOIN Project AS p
   ON d.Num_S = p.Department_Num_S;
-
+  GO
 
   --Write a query to retrieve the names of employees working on the project "Website Redesign," including their roles in the project.
 
@@ -187,16 +187,18 @@ GROUP BY P.Title;
 GO
 --Write a query to retrieve a summary of roles employees have across different projects, including the employee name, project title, and role.
 
-SELECT EP.Role, P.Title, E.Name 
+SELECT 
+   EP.Role, P.Title, E.Name 
 FROM Employee_Project AS EP 
-JOIN Project AS P ON EP.Project_Num_P=P.Num_P 
-JOIN Employee AS E ON EP.Employee_Num_E=E.Num_E
+  JOIN Project AS P 
+    ON EP.Project_Num_P=P.Num_P 
+  JOIN Employee AS E 
+    ON EP.Employee_Num_E=E.Num_E
 GO
 
 --Write a query to retrieve the total salary expenditure for each department, including the department label and manager name.
 SELECT 
-    D.Label,
-    D.Manager_Name,
+    D.Label,D.Manager_Name,
     SUM(E.Salary) AS Total_Salary_Expenditure
 FROM Employee AS E
 JOIN Department AS D 
